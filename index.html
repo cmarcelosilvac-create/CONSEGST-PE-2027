@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONSEGST-PE 2027 | Congresso Pernambucano de Segurança do Trabalho</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        segverde: '#00875A',
+                        segazul: '#0F2C59',
+                        segamarelo: '#F4B400',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+    <style>
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(244, 180, 0, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(244, 180, 0, 0.8); }
+        }
+        .diamond-card {
+            animation: pulse-glow 3s infinite ease-in-out;
+            background: linear-gradient(135deg, #0F2C59 0%, #143d7c 100%);
+            color: white;
+            border: 2px solid #F4B400;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-segverde selection:text-white">
+
+    <!-- Top Info Bar -->
+    <div class="bg-segazul text-white text-xs sm:text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span><i class="fas fa-calendar-alt text-segamarelo mr-1"></i> <span id="top-date">23 de Abril de 2027</span></span>
+                <span><i class="fas fa-map-marker-alt text-segamarelo mr-1"></i> <span id="top-location">Centro de Convenções de Pernambuco (CECON-PE)</span></span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="bg-segverde/30 text-segamarelo px-2 py-0.5 rounded font-medium text-xs">Vagas Limitadas: <span id="top-capacity">5.000 Participantes</span></span>
+                <span class="bg-white/10 px-2.5 py-0.5 rounded text-xs text-blue-100 flex items-center gap-1.5 font-medium"><i class="fas fa-eye text-segamarelo"></i> Visitantes: <strong id="visitor-counter">0</strong></span>
+                <button onclick="openAdminModal()" class="bg-white/10 hover:bg-white/20 px-3 py-1 rounded transition text-xs flex items-center gap-1.5 font-semibold text-segamarelo border border-segamarelo/30">
+                    <i class="fas fa-lock"></i> Painel CMS / Admin
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-segverde to-segazul flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-shield-alt text-2xl text-segamarelo"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-tight text-segazul uppercase"><span id="brand-title">CONSEGST-PE</span></h1>
+                    <p class="text-xs font-medium text-gray-500 tracking-wide uppercase" id="brand-subtitle">Congresso Pernambucano de SST</p>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-7 font-medium text-sm">
+                <a href="#sobre" class="hover:text-segverde transition">O Evento</a>
+                <a href="#eixos" class="hover:text-segverde transition">Eixos</a>
+                <a href="#programacao" class="hover:text-segverde transition">Programação</a>
+                <a href="#patrocinadores" class="hover:text-segverde transition">Patrocinadores</a>
+                <a href="#empresas" class="hover:text-segverde transition">Empresas Presentes</a>
+                <a href="#local" class="hover:text-segverde transition">Local</a>
+                <a href="#certificados" class="hover:text-segverde transition">Certificados</a>
+            </nav>
+
+            <div class="hidden sm:flex items-center gap-3">
+                <button onclick="openTicketModal()" class="bg-segverde hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition flex items-center gap-2">
+                    <i class="fas fa-ticket-alt"></i> Garantir Ingresso
+                </button>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 hover:text-segverde focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-segazul via-[#143d7c] to-segverde text-white py-20 lg:py-28 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <span class="inline-flex items-center gap-2 bg-segamarelo text-segazul font-bold text-xs px-3 py-1.5 rounded-full uppercase tracking-wider shadow">
+                    <i class="fas fa-star"></i> <span id="hero-badge">O Maior Encontro de SST do Nordeste</span>
+                </span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none">
+                    <span id="hero-title">CONSEGST-PE</span> <span class="text-segamarelo" id="hero-year">2027</span>
+                </h2>
+                <p class="text-lg text-blue-100 max-w-2xl font-light leading-relaxed" id="hero-desc">
+                    Reunindo 5.000 profissionais, especialistas e líderes no Centro de Convenções de Pernambuco para debater o futuro da Segurança e Saúde no Trabalho.
+                </p>
+
+                <!-- Countdown Timer -->
+                <div class="grid grid-cols-4 gap-3 max-w-md mx-auto lg:mx-0 pt-2">
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-3 text-center border border-white/10">
+                        <span id="days" class="text-2xl sm:text-3xl font-extrabold text-segamarelo">00</span>
+                        <span class="block text-[10px] uppercase tracking-wider text-blue-200">Dias</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-3 text-center border border-white/10">
+                        <span id="hours" class="text-2xl sm:text-3xl font-extrabold text-segamarelo">00</span>
+                        <span class="block text-[10px] uppercase tracking-wider text-blue-200">Horas</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-3 text-center border border-white/10">
+                        <span id="minutes" class="text-2xl sm:text-3xl font-extrabold text-segamarelo">00</span>
+                        <span class="block text-[10px] uppercase tracking-wider text-blue-200">Min</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-3 text-center border border-white/10">
+                        <span id="seconds" class="text-2xl sm:text-3xl font-extrabold text-segamarelo">00</span>
+                        <span class="block text-[10px] uppercase tracking-wider text-blue-200">Seg</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5">
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 shadow-2xl space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-bullhorn text-segamarelo"></i> <span id="highlights-title">Destaques da Edição 2027</span>
+                    </h3>
+                    <ul class="space-y-4 text-sm text-blue-50" id="highlights-container-site"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre o Evento -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-segazul" id="about-section-title">O Maior Congresso de SST de Pernambuco</h2>
+                <div class="w-20 h-1.5 bg-segverde mx-auto rounded-full"></div>
+                <p class="text-gray-600 text-base" id="about-section-desc">O CONSEGST-PE 2027 consolida Recife como o polo central de discussões sobre prevenção de acidentes e saúde ocupacional.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8" id="about-cards-container"></div>
+        </div>
+    </section>
+
+    <!-- Programação -->
+    <section id="programacao" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-segazul" id="prog-section-title">Programação do Evento & Palestrantes</h2>
+                <div class="w-20 h-1.5 bg-segverde mx-auto rounded-full"></div>
+                <p class="text-gray-600 text-base"><span id="prog-date">23 de Abril de 2027</span> • <span id="prog-location-sub">Centro de Convenções de Pernambuco</span></p>
+            </div>
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                <div class="bg-segazul text-white px-6 py-4 flex justify-between items-center">
+                    <span class="font-bold"><i class="fas fa-calendar-day text-segamarelo mr-2"></i> Cronograma Oficial</span>
+                </div>
+                <div class="divide-y divide-gray-200" id="schedule-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patrocinadores -->
+    <section id="patrocinadores" class="py-20 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-segverde font-bold text-xs uppercase tracking-widest bg-segverde/10 px-3 py-1.5 rounded-full"><i class="fas fa-handshake mr-1"></i> Parceiros Oficiais</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-segazul" id="pat-div-title">Empresas Patrocinadoras</h2>
+                <div class="w-20 h-1.5 bg-segverde mx-auto rounded-full"></div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="sponsors-display-container"></div>
+        </div>
+    </section>
+
+    <!-- Certificados e Validação (Com código fixo CONSEGSTPE27) -->
+    <section id="certificados" class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-segverde font-bold text-xs uppercase tracking-widest bg-segverde/10 px-3 py-1.5 rounded-full"><i class="fas fa-certificate mr-1"></i> Pós-Evento</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-segazul">Certificado Digital & Validação Oficial</h2>
+                <div class="w-20 h-1.5 bg-segverde mx-auto rounded-full"></div>
+                <p class="text-gray-600 text-base">Após o congresso em 23 de Abril de 2027, emita seu certificado. Utilize o código oficial <strong>CONSEGSTPE27</strong> para validações.</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+                <form onsubmit="handleValidarCertificado(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Código de Validação do Certificado</label>
+                        <input type="text" id="cert-code-id" required placeholder="CONSEGSTPE27" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-sm uppercase focus:outline-none focus:border-segverde">
+                    </div>
+                    <button type="submit" class="w-full bg-segazul hover:bg-blue-900 text-white font-bold py-3.5 rounded-xl shadow transition flex items-center justify-center gap-2">
+                        <i class="fas fa-shield-alt"></i> Verificar Autenticidade no Sistema
+                    </button>
+                </form>
+                <div id="cert-valid-result" class="hidden mt-6 p-6 rounded-xl border"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-segazul text-white py-12 border-t border-blue-900 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <h3 class="font-bold text-lg">CONSEGST-PE 2027</h3>
+            <p class="text-xs text-blue-200 mt-1">23 de Abril de 2027 • Centro de Convenções de Pernambuco</p>
+        </div>
+    </footer>
+
+    <!-- Script de Configurações, Patrocinadores e Validação -->
+    <script>
+        const siteConfig = {
+            title: 'CONSEGST-PE', year: '2027', subtitle: 'Congresso Pernambucano de SST',
+            date: '23 de Abril de 2027', countdownDate: '2027-04-23',
+            location: 'Centro de Convenções de Pernambuco (CECON-PE)',
+            highlights: [
+                { title: 'Atualizações de NRs:', text: 'Normas Regulamentadoras e conformidade técnica.' },
+                { title: 'IA & Tecnologia em SST:', text: 'Inovações em monitoramento e EPIs inteligentes.' }
+            ],
+            aboutCards: [
+                { icon: 'fa-graduation-cap', title: 'Conteúdo Técnico', desc: 'Palestras magnas com os maiores especialistas.' },
+                { icon: 'fa-handshake', title: 'Networking', desc: 'Conecte-se com líderes de EHS.' },
+                { icon: 'fa-store', title: 'Expo SST', desc: 'Exposição simultânea de marcas e equipamentos.' }
+            ],
+            schedule: [
+                { time: '08:00', title: 'Acreditação e Abertura Oficial', speaker: 'Comissão Organizadora', desc: 'Boas-vindas aos participantes e autoridades.', room: 'Auditório Principal' }
+            ],
+            sponsors: [
+                { name: 'Petribú Industrial', tier: 'Patrocinador Diamante', desc: 'Líder em excelência e EHS.' },
+                { name: 'Segurança Total', tier: 'Patrocinador Ouro', desc: 'EPIs e Proteção Avançada.' }
+            ]
+        };
+
+        // Renderizar conteúdo dinâmico na página
+        document.getElementById('highlights-container-site').innerHTML = siteConfig.highlights.map(h => `
+            <li class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-segverde flex items-center justify-center text-white shrink-0 mt-0.5"><i class="fas fa-check text-xs"></i></div>
+                <span><strong>${h.title}</strong> ${h.text}</span>
+            </li>
+        `).join('');
+
+        document.getElementById('about-cards-container').innerHTML = siteConfig.aboutCards.map(c => `
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 shadow-sm">
+                <div class="w-14 h-14 rounded-xl bg-segverde/10 text-segverde flex items-center justify-center text-2xl font-bold mb-6"><i class="fas ${c.icon}"></i></div>
+                <h3 class="text-xl font-bold text-segazul mb-3">${c.title}</h3>
+                <p class="text-gray-600 text-sm">${c.desc}</p>
+            </div>
+        `).join('');
+
+        document.getElementById('schedule-list').innerHTML = siteConfig.schedule.map(s => `
+            <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-start gap-4">
+                    <span class="bg-segverde/10 text-segverde font-bold px-3 py-1.5 rounded-lg text-sm shrink-0">${s.time}</span>
+                    <div>
+                        <h4 class="font-bold text-segazul text-lg">${s.title}</h4>
+                        <p class="text-xs font-semibold text-segverde mt-0.5 mb-1"><i class="fas fa-user-tie mr-1"></i> Ministrante: ${s.speaker}</p>
+                        <p class="text-gray-600 text-sm">${s.desc}</p>
+                    </div>
+                </div>
+                <span class="text-xs text-gray-500 bg-gray-100 px-2.5 py-1 rounded">${s.room}</span>
+            </div>
+        `).join('');
+
+        // Organizar Patrocinadores (Diamante em destaque animado no topo, Ouro e demais abaixo)
+        const diamonds = siteConfig.sponsors.filter(s => s.tier.toLowerCase().includes('diamante'));
+        const ouros = siteConfig.sponsors.filter(s => s.tier.toLowerCase().includes('ouro'));
+        const others = siteConfig.sponsors.filter(s => !s.tier.toLowerCase().includes('diamante') && !s.tier.toLowerCase().includes('ouro'));
+
+        let sponsorsHTML = '';
+        if(diamonds.length > 0) {
+            sponsorsHTML += `<div class="col-span-full mb-6">
+                <div class="text-center mb-4"><span class="bg-amber-500 text-segazul font-extrabold text-xs px-4 py-1.5 rounded-full uppercase shadow-md animate-pulse"><i class="fas fa-gem mr-1"></i> Patrocinador Diamante (Destaque Principal)</span></div>
+                <div class="grid sm:grid-cols-2 gap-6">
+                    ${diamonds.map(sp => `
+                        <div class="diamond-card p-8 rounded-2xl shadow-2xl flex flex-col justify-between text-center">
+                            <div class="w-16 h-16 bg-segamarelo text-segazul rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow"><i class="fas fa-gem"></i></div>
+                            <span class="text-xs font-black uppercase tracking-widest text-segamarelo bg-white/10 px-3 py-1 rounded-full">${sp.tier}</span>
+                            <h4 class="font-black text-2xl text-white mt-4 mb-2">${sp.name}</h4>
+                            <p class="text-blue-100 text-sm">${sp.desc}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>`;
+        }
+        if(ouros.length > 0) {
+            sponsorsHTML += `<div class="col-span-full mt-4 mb-4">
+                <div class="text-center mb-3"><span class="bg-amber-100 text-amber-800 font-bold text-xs px-3 py-1 rounded-full uppercase"><i class="fas fa-medal mr-1"></i> Patrocinador Ouro</span></div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    ${ouros.map(sp => `
+                        <div class="bg-white p-6 rounded-xl shadow-md border-2 border-amber-400 text-center">
+                            <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">${sp.tier}</span>
+                            <h4 class="font-extrabold text-lg text-segazul mt-3 mb-2">${sp.name}</h4>
+                            <p class="text-gray-600 text-xs">${sp.desc}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>`;
+        }
+        document.getElementById('sponsors-display-container').innerHTML = sponsorsHTML;
+
+        // Validação do Certificado com código fixo CONSEGSTPE27
+        function handleValidarCertificado(e) {
+            e.preventDefault();
+            const code = document.getElementById('cert-code-id').value.trim().toUpperCase();
+            const resBox = document.getElementById('cert-valid-result');
+            resBox.classList.remove('hidden');
+            if(code === 'CONSEGSTPE27') {
+                resBox.className = 'mt-6 p-6 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2 text-emerald-900';
+                resBox.innerHTML = `<div class="flex items-center gap-2 font-bold text-segverde text-base"><i class="fas fa-check-circle"></i> Certificado Válido e Autêntico!</div><p class="text-xs"><strong>Evento:</strong> CONSEGST-PE 2027 (23 de Abril de 2027)</p><p class="text-xs"><strong>Código Oficial:</strong> CONSEGSTPE27</p>`;
+            } else {
+                resBox.className = 'mt-6 p-6 bg-red-50 border border-red-200 rounded-xl space-y-2 text-red-900';
+                resBox.innerHTML = `<div class="flex items-center gap-2 font-bold text-red-600 text-base"><i class="fas fa-times-circle"></i> Código de Certificado Inválido ou Não Encontrado</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
